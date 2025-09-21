@@ -16,6 +16,56 @@ public class IT2A_Group8_Lab3 {
     static boolean isArrayCreated = false; // track if array exists
     public static void main(String[] args) {
         
+        createArray();
+
+        int choice;
+
+        while (isArrayCreated) {
+            System.out.println("-----------------------------------------");
+            System.out.println("     SORTING ALGORITHMS MENU PROGRAM     ");
+            System.out.println("-----------------------------------------\n");
+            System.out.println("[1] Bubble Sort");
+            System.out.println("[2] Selection Sort");
+            System.out.println("[3] Insertion Sort");
+            System.out.println("[4] Exit");
+            System.out.print("Enter Choice: ");
+
+            // Validate input once
+            Integer validatedChoice = getValidatedInput();
+
+            // If validation failed, go back to menu
+            if (validatedChoice == null) {
+                continue;
+            }
+
+            choice = validatedChoice;
+
+            switch (choice) {
+                case 1:
+                    bubbleSort();
+                    break;
+                case 2:
+                    System.out.println("Selection sort");
+                    break;
+                case 3:
+                    System.out.println("Insertion sort");
+                    break;
+                case 4:
+                    if (exit()) {
+                        return; // stop program
+                    } else {
+                        System.out.println(""); 
+                        createArray();
+                        break; 
+                    }
+                default:
+                    System.out.println("Invalid choice. Please select from 1, 2, 3, or 4 only.\n");
+            }
+        }
+    }
+
+    // Create and insert array elements
+    public static void createArray() {
         System.out.println("-----------------------------------------");
         System.out.println("     SORTING ALGORITHMS MENU PROGRAM     ");
         System.out.println("-----------------------------------------\n");
@@ -82,57 +132,14 @@ public class IT2A_Group8_Lab3 {
             }
 
             // Display entered array
-            System.out.print("\nYou entered: ");
+            System.out.print("\nArray Elements: ");
             for (int num : arr) {
                 System.out.print(num + " ");
             }
             System.out.println("\n");
-
-            // For now, break loop (later will add menu for sorting)
             break;
         }
-
-        int choice;
-
-        while (isArrayCreated) {
-            System.out.println("-----------------------------------------");
-            System.out.println("     SORTING ALGORITHMS MENU PROGRAM     ");
-            System.out.println("-----------------------------------------\n");
-            System.out.println("[1] Bubble Sort");
-            System.out.println("[2] Selection Sort");
-            System.out.println("[3] Insertion Sort");
-            System.out.println("[4] Exit");
-            System.out.print("Enter Choice: ");
-
-            // Validate input once
-            Integer validatedChoice = getValidatedInput();
-
-            // If validation failed, go back to menu
-            if (validatedChoice == null) {
-                continue;
-            }
-
-            choice = validatedChoice;
-
-            switch (choice) {
-                case 1:
-                    System.out.println("Bubble sort");
-                    break;
-                case 2:
-                    System.out.println("Selection sort");
-                    break;
-                case 3:
-                    System.out.println("Insertion sort");
-                    break;
-                case 4:
-                    System.out.println("Exit");
-                    return;
-                default:
-                    System.out.println("Invalid choice. Please select from 1, 2, 3, or 4 only.\n");
-            }
-        }
     }
-
 
     // Input Validation Method
     public static Integer getValidatedInput() {
@@ -150,4 +157,71 @@ public class IT2A_Group8_Lab3 {
             return null; // invalid input = back to menu
         }
     }
+
+    // Bubble sort method
+    public static void bubbleSort() {
+        int n = arr.length;
+
+        System.out.println("\nBubble Sort");
+        System.out.print("\nGiven Array Elements:");
+
+        for (int num : arr) {
+            System.out.printf(" %2d ", num);
+        }
+        System.out.println("\n");
+
+        // Bubble Sort (largest value to the end using pair-wise comparisons and swapping)
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    // swap arr[j] and arr[j+1]
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+
+            // Print array after each pass
+            System.out.print((i + 1) + ".");
+            for (int num : arr) {
+                System.out.printf(" %5d ", num);
+            }
+            System.out.println();
+        }
+
+        // Final sorted array
+        System.out.print("\nThe Sorted Array Elements: ");
+        for (int num : arr) {
+            System.out.printf(" %2d ", num);
+        }
+
+        System.out.print("\nPress any key to continue...");
+        scanner.nextLine();
+        System.out.println("");
+    }
+
+    // Selection sort method
+
+    // Insertion sort method
+
+    // Exit method
+    public static boolean exit() {
+        while (true) {
+            System.out.print("\nTry Again (Y/N)? ");
+            String input = scanner.nextLine().trim();
+
+            if (input.equalsIgnoreCase("Y")) {
+                isArrayCreated = false; // reset so new array will be created next time
+                return false;  // repeat process
+            } else if (input.equalsIgnoreCase("N")) {
+                System.out.println("Exiting the program. Goodbye!");
+                return true; // terminate program
+            } else if (input.isEmpty()) {
+                System.out.println("Error: Input cannot be empty. Please enter Y or N only\n");
+            } else {
+                System.out.println("Error: Invalid input. Please enter Y or N only.\n");
+            }
+        }
+    }
+
 }
