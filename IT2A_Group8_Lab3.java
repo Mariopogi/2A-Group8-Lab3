@@ -55,7 +55,7 @@ public class IT2A_Group8_Lab3 {
                         return; // stop program
                     } else {
                         System.out.println(""); 
-                        createArray();
+                        createArray(); // Go back to option 1
                         break; 
                     }
                 default:
@@ -182,7 +182,7 @@ public class IT2A_Group8_Lab3 {
             }
 
             // Print array after each pass
-            System.out.print((i + 1) + ".");
+            System.out.printf("%2d. ", (i + 1));
             for (int num : arr) {
                 System.out.printf(" %5d ", num);
             }
