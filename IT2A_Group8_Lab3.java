@@ -14,8 +14,9 @@ public class IT2A_Group8_Lab3 {
     static Scanner scanner = new Scanner(System.in);
     static Integer[] arr = null; // reference to the array
     static boolean isArrayCreated = false; // track if array exists
+
     public static void main(String[] args) {
-        
+
         createArray();
 
         int choice;
@@ -54,9 +55,9 @@ public class IT2A_Group8_Lab3 {
                     if (exit()) {
                         return; // stop program
                     } else {
-                        System.out.println(""); 
+                        System.out.println("");
                         createArray(); // Go back to option 1
-                        break; 
+                        break;
                     }
                 default:
                     System.out.println("Invalid choice. Please select from 1, 2, 3, or 4 only.\n");
@@ -70,8 +71,9 @@ public class IT2A_Group8_Lab3 {
         System.out.println("     SORTING ALGORITHMS MENU PROGRAM     ");
         System.out.println("-----------------------------------------\n");
 
-         while (true) {
-            // Create array - Ask for array size (only if not created yet or if user wants new array)
+        while (true) {
+            // Create array - Ask for array size (only if not created yet or if user wants
+            // new array)
             if (!isArrayCreated) {
                 Integer arraySize = null;
 
@@ -98,7 +100,8 @@ public class IT2A_Group8_Lab3 {
                         continue;
                     }
 
-                    // Makes sure that even if the user types multiple spaces between numbers, it still works.
+                    // Makes sure that even if the user types multiple spaces between numbers, it
+                    // still works.
                     String[] parts = line.split("\\s+");
 
                     // Check if all input are numbers
@@ -112,7 +115,8 @@ public class IT2A_Group8_Lab3 {
                             break;
                         }
                     }
-                    if (!allNumbers) continue;
+                    if (!allNumbers)
+                        continue;
 
                     // Now check if the count is correct
                     if (parts.length != arraySize) {
@@ -160,7 +164,7 @@ public class IT2A_Group8_Lab3 {
 
     // Bubble sort method
     public static void bubbleSort() {
-        Integer[] tempArr = new Integer[arr.length]; 
+        Integer[] tempArr = new Integer[arr.length];
         System.arraycopy(arr, 0, tempArr, 0, tempArr.length);
         int n = tempArr.length;
 
@@ -172,7 +176,8 @@ public class IT2A_Group8_Lab3 {
         }
         System.out.println("\n");
 
-        // Bubble Sort (largest value to the end using pair-wise comparisons and swapping)
+        // Bubble Sort (largest value to the end using pair-wise comparisons and
+        // swapping)
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
                 if (tempArr[j] > tempArr[j + 1]) {
@@ -203,24 +208,25 @@ public class IT2A_Group8_Lab3 {
     }
 
     // Selection sort method
-    public static void selectionSort(){
-        Integer[] tempArr = new Integer[arr.length]; 
+    public static void selectionSort() {
+        Integer[] tempArr = new Integer[arr.length];
         System.arraycopy(arr, 0, tempArr, 0, tempArr.length);
-        
+
         System.out.println("\nSelection Sort");
         System.out.print("\nGiven Array Elements:");
 
         for (int elements : tempArr) {
-            System.out.printf(" %2d",elements);
+            System.out.printf(" %2d", elements);
         }
         System.out.println();
 
         for (int i = 0; i < tempArr.length - 1; i++) {
             int indexOfMin = i;
             for (int j = i + 1; j < tempArr.length; j++) {
-                if (tempArr[j] < tempArr[indexOfMin]) indexOfMin = j;    
+                if (tempArr[j] < tempArr[indexOfMin])
+                    indexOfMin = j;
             }
-            
+
             int temp = tempArr[indexOfMin];
             tempArr[indexOfMin] = tempArr[i];
             tempArr[i] = temp;
@@ -231,7 +237,7 @@ public class IT2A_Group8_Lab3 {
             }
             System.out.println();
         }
-        
+
         // Final sorted array
         System.out.print("\nThe Sorted Array Elements: ");
         for (Integer num : tempArr) {
@@ -246,14 +252,14 @@ public class IT2A_Group8_Lab3 {
 
     // Insertion sort method
     public static void insertionSort() {
-        Integer[] tempArr = new Integer[arr.length]; 
+        Integer[] tempArr = new Integer[arr.length];
         System.arraycopy(arr, 0, tempArr, 0, tempArr.length);
 
         System.out.println("\nInsertion Sort");
         System.out.print("\nGiven Array Elements:");
 
         for (int elements : tempArr) {
-            System.out.printf(" %2d",elements);
+            System.out.printf(" %2d", elements);
         }
         System.out.println();
 
@@ -261,22 +267,22 @@ public class IT2A_Group8_Lab3 {
             if (i > 0) {
                 int temp = tempArr[i];
                 int j = i - 1;
-            
-                while (j>=0 && tempArr[j] > temp) {
-                    tempArr[j+1] = tempArr[j];
+
+                while (j >= 0 && tempArr[j] > temp) {
+                    tempArr[j + 1] = tempArr[j];
                     j--;
                 }
-            
-                tempArr[j+1] = temp;
-            } 
 
+                tempArr[j + 1] = temp;
+            }
             System.out.printf("%2d. ", (i + 1));
-            for (int num : arr) {
+            for (int num : tempArr) {
                 System.out.printf(" %5d", num);
             }
             System.out.println();
+
         }
-        
+
         // Final sorted array
         System.out.print("\nThe Sorted Array Elements: ");
         for (Integer num : tempArr) {
@@ -296,7 +302,7 @@ public class IT2A_Group8_Lab3 {
 
             if (input.equalsIgnoreCase("Y")) {
                 isArrayCreated = false; // reset so new array will be created next time
-                return false;  // repeat process
+                return false; // repeat process
             } else if (input.equalsIgnoreCase("N")) {
                 System.out.println("Exiting the program. Goodbye!");
                 return true; // terminate program
