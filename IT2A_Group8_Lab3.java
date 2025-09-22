@@ -45,10 +45,10 @@ public class IT2A_Group8_Lab3 {
                     bubbleSort();
                     break;
                 case 2:
-                    System.out.println("Selection sort");
+                    selectionSort();
                     break;
                 case 3:
-                    System.out.println("Insertion sort");
+                    insertionSort();
                     break;
                 case 4:
                     if (exit()) {
@@ -160,12 +160,14 @@ public class IT2A_Group8_Lab3 {
 
     // Bubble sort method
     public static void bubbleSort() {
-        int n = arr.length;
+        Integer[] tempArr = new Integer[arr.length]; 
+        System.arraycopy(arr, 0, tempArr, 0, tempArr.length);
+        int n = tempArr.length;
 
         System.out.println("\nBubble Sort");
-        System.out.print("\nGiven Array Elements:");
+        System.out.print("\nGiven tempArray Elements:");
 
-        for (int num : arr) {
+        for (int num : tempArr) {
             System.out.printf(" %2d ", num);
         }
         System.out.println("\n");
@@ -173,25 +175,25 @@ public class IT2A_Group8_Lab3 {
         // Bubble Sort (largest value to the end using pair-wise comparisons and swapping)
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
-                if (arr[j] > arr[j + 1]) {
-                    // swap arr[j] and arr[j+1]
-                    int temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
+                if (tempArr[j] > tempArr[j + 1]) {
+                    // swap tempArr[j] and tempArr[j+1]
+                    int temp = tempArr[j];
+                    tempArr[j] = tempArr[j + 1];
+                    tempArr[j + 1] = temp;
                 }
             }
 
-            // Print array after each pass
+            // Print tempArray after each pass
             System.out.printf("%2d. ", (i + 1));
-            for (int num : arr) {
+            for (int num : tempArr) {
                 System.out.printf(" %5d ", num);
             }
             System.out.println();
         }
 
-        // Final sorted array
-        System.out.print("\nThe Sorted Array Elements: ");
-        for (int num : arr) {
+        // Final sorted tempArray
+        System.out.print("\nThe Sorted tempArray Elements: ");
+        for (int num : tempArr) {
             System.out.printf(" %2d ", num);
         }
 
@@ -201,8 +203,90 @@ public class IT2A_Group8_Lab3 {
     }
 
     // Selection sort method
+    public static void selectionSort(){
+        Integer[] tempArr = new Integer[arr.length]; 
+        System.arraycopy(arr, 0, tempArr, 0, tempArr.length);
+        
+        System.out.println("\nSelection Sort");
+        System.out.print("\nGiven Array Elements:");
+
+        for (int elements : tempArr) {
+            System.out.printf(" %2d",elements);
+        }
+        System.out.println();
+
+        for (int i = 0; i < tempArr.length - 1; i++) {
+            int indexOfMin = i;
+            for (int j = i + 1; j < tempArr.length; j++) {
+                if (tempArr[j] < tempArr[indexOfMin]) indexOfMin = j;    
+            }
+            
+            int temp = tempArr[indexOfMin];
+            tempArr[indexOfMin] = tempArr[i];
+            tempArr[i] = temp;
+
+            System.out.printf("%2d. ", (i + 1));
+            for (int num : tempArr) {
+                System.out.printf(" %5d", num);
+            }
+            System.out.println();
+        }
+        
+        // Final sorted array
+        System.out.print("\nThe Sorted Array Elements: ");
+        for (Integer num : tempArr) {
+            System.out.printf(" %2d ", num);
+        }
+
+        System.out.print("\nPress any key to continue...");
+        scanner.nextLine();
+        System.out.println("");
+
+    }
 
     // Insertion sort method
+    public static void insertionSort() {
+        Integer[] tempArr = new Integer[arr.length]; 
+        System.arraycopy(arr, 0, tempArr, 0, tempArr.length);
+
+        System.out.println("\nInsertion Sort");
+        System.out.print("\nGiven Array Elements:");
+
+        for (int elements : tempArr) {
+            System.out.printf(" %2d",elements);
+        }
+        System.out.println();
+
+        for (int i = 0; i < tempArr.length; i++) {
+            if (i > 0) {
+                int temp = tempArr[i];
+                int j = i - 1;
+            
+                while (j>=0 && tempArr[j] > temp) {
+                    tempArr[j+1] = tempArr[j];
+                    j--;
+                }
+            
+                tempArr[j+1] = temp;
+            } 
+
+            System.out.printf("%2d. ", (i + 1));
+            for (int num : arr) {
+                System.out.printf(" %5d", num);
+            }
+            System.out.println();
+        }
+        
+        // Final sorted array
+        System.out.print("\nThe Sorted Array Elements: ");
+        for (Integer num : tempArr) {
+            System.out.printf(" %2d ", num);
+        }
+
+        System.out.print("\nPress any key to continue...");
+        scanner.nextLine();
+        System.out.println("");
+    }
 
     // Exit method
     public static boolean exit() {
